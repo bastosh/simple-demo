@@ -1,0 +1,103 @@
+{% extends 'docs.html.twig' %}
+
+{% block title %}
+    {{ page }}
+{% endblock %}
+
+{% block content %}
+    <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+
+        <header>
+            <h1 class="text-center">Basics</h1>
+            <hr>
+            <div class="grid-x align-center margin-top-2">
+                <div class="medium-10 large-9">
+                    <nav class="grid-x align-justify margin-bottom-3">
+                        <a href="/docs/architecture"><i class="fas fa-arrow-left"></i> Installation</a>
+                        <a href="/docs/views">Views <i class="fas fa-arrow-right"></i></a>
+                    </nav>
+                    <p class="lead margin-top-1 margin-bottom-0">In HTTP World, everything is about receiving requests and sending back responses. Simple provides a basic request-route-controller-view workflow to make your life easy.</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid-x align-center margin-top-2">
+            <div class="small-11 medium-10 large-9">
+
+                <section>
+                    <h2>Routes</h2>
+                    <p class="margin-bottom-0">We need to tell our app which routes should lead to the pages or actions we need. We do this in the <code>app/routes.php</code> file with the following syntax&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="php">
+$router->get('welcome', 'PagesController@welcome');
+                            </code>
+                        </pre>
+                    </div>
+                    <p>Doing so, we fill the <code>core/Router.php</code> class with a array of routes when our app bootstraps.</p>
+                    <p class="margin-bottom-0">We define here the request method expected for each route, for example&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="php">
+$router->get('posts') // to show all the posts
+$router->post('posts') // to send the data from a form
+$router->put('posts/{id}') // to update a given post
+$router->delete('posts/{id}') // to delete a given post
+                            </code>
+                        </pre>
+
+                    </div>
+                    <p>Two parameters are mandatory&thinsp;:</p>
+                    <ul>
+                        <li>the request uri expected like <code>'about'</code>, <code>'contact'</code>, <code>'languages/php'</code>, <code>'articles/7/edit'</code>...</li>
+                        <li>the controller in charge of handling the request, following a convention&thinsp;: <code>ControllerName@action</code></li>
+                    </ul>
+                    <p>In our previous example, the request <code>'welcome'</code> would be handled by the method <code>welcome()</code> of the controller named <code>PagesController</code>.</p>
+                    <p>So obviously we now need controllers.</p>
+                </section>
+
+                <section>
+                    <h2>Controllers</h2>
+                    <p>Controllers live in the <code>app/controllers</code> folder.</p>
+                    <p class="margin-bottom-0">A basic controller would look like this&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code>
+class PagesController
+{
+    public function welcome()
+    {
+        return view('pages.welcome');
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>The main job of a controller is to return a view.</p>
+                    <p>Simple uses a helper function view() to return views.</p>
+                    <p>Basically, it is a shortcut for requiring a specific view and we could get the exact same result with&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code>
+class PagesController
+{
+    public function welcome()
+    {
+        require "../app/views/pages/about.view.php";
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>By following a convention and storing all your views (name.view.php) in the <code>app/views</code> folder, well organized in folders according to the logic of your app, you can refer them by passing the view() helper the name of the folder and the name of the view, without its extensions.</p>
+                    <p>So we can now talk about views and the frontend stuffs.</p>
+                </section>
+
+                <nav class="grid-x align-justify padding-bottom-2">
+                    <a href="/docs/architecture"><i class="fas fa-arrow-left"></i> Installation</a>
+                    <a href="/docs/views">Views <i class="fas fa-arrow-right"></i></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}

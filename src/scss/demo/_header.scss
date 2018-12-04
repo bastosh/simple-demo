@@ -1,0 +1,86 @@
+.header {
+  background-color: $primary-color;
+  li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 500;
+  }
+  li a {
+    color: $white;
+    &:hover {
+      color: $white;
+      opacity: .7;
+    }
+  }
+  .is-dropdown-submenu {
+    border-radius: 4px;
+    &-item a {
+      color: $primary-color;
+      &:hover {
+        color: $primary-color;
+        opacity: .8;
+      }
+    }
+  }
+  .dropdown.menu > li > a,
+  .is-accordion-submenu {
+    background: $primary-color;
+    color: $white;
+  }
+  .accordion-menu > li > a {
+    color: $white;
+  }
+  .top-bar {
+    &-right {
+      li:last-child a {
+        border: solid 2px rgba($white, 0.3);
+        border-radius: 4px;
+        padding: 12px 24px;
+        font-weight: 500;
+        color: $white;
+        &:focus,
+        &:hover {
+          border-color: $white;
+          color: $primary-color;
+          background-color: $white;
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .content {
+    color: $white;
+    text-align: center;
+    font-weight: 300;
+    padding-top: rem-calc(120);
+    padding-bottom: rem-calc(180);
+  }
+  @include breakpoint(medium down) {
+    .content {
+      padding-top: rem-calc(80);
+      padding-bottom: rem-calc(180);
+    }
+  }
+  @include breakpoint(mobile down) {
+    .content {
+      padding-top: rem-calc(40);
+      padding-bottom: rem-calc(140);
+    }
+  }
+  @include breakpoint(medium up) {
+    .subtitle {
+      opacity: .8;
+    }
+  }
+  @include breakpoint(large up) {
+    .subtitle {
+      opacity: .7;
+    }
+  }
+  @media (max-height: 250px){
+    .nav {
+      display: none;
+    }
+  }
+}

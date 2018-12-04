@@ -1,0 +1,142 @@
+{% extends 'docs.html.twig' %}
+
+{% block title %}
+    {{ page }}
+{% endblock %}
+
+{% block content %}
+    <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+
+        <header>
+            <h1 class="text-center">Database</h1>
+            <hr>
+            <div class="grid-x align-center margin-top-2">
+                <div class="medium-10 large-9">
+                    <nav class="grid-x align-justify margin-bottom-3">
+                        <a href="/docs/views"><i class="fas fa-arrow-left"></i> Views</a>
+                        <a href="/docs/security">Security <i class="fas fa-arrow-right"></i></a>
+                    </nav>
+                    <p class="lead margin-top-1 margin-bottom-0">Most of the time, we won’t hardcode our variables in the controllers, we will fetch the data from a database.</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid-x align-center margin-top-2">
+            <div class="small-11 medium-10 large-9">
+
+                <section>
+                    <h2>Connection</h2>
+                    <p>You don’t need to worry about connecting to the database via PDO. You just have to setup the blanks in the config file and the <code>Connection.php</code> class does the job.</p>
+                    <p>Your real job is to query, and the QueryBuilder might bring some help for that.</p>
+                </section>
+
+                <section>
+                    <h2>QueryBuilder</h2>
+                    <p>The QueryBuilder provides generic methods to fetch data from the database. The most common queries are covered, and you just need to add ones if you have specific needs.</p>
+                    <p>You can access the <code>QueryBuilder.php</code> class anywhere in your app (but you will mainly do this from a controller) with the following syntax&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code>
+App::get('database')
+                            </code>
+                        </pre>
+                    </div>
+                    <p><code>App.php</code> class is a container, you can bind and get useful stuffs, like a QueryBuilder for example.</p>
+                    <p>Here a some of the methods you can call&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code>
+App::get('database')->selectAll($table, $model)
+App::get('database')->select($table, $id, $model)
+App::get('database')->insert($table, $parameters)
+App::get('database')->delete($table, $id)
+                            </code>
+                        </pre>
+                    </div>
+                    <p>For example, here is the way you would fetch one specific article from your blog&thinsp;.</p>
+                    <p>Step one, create a route&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="php">
+// app/routes.php
+
+$router->get('posts/{id}', 'PostsController@show');
+                            </code>
+                        </pre>
+                    </div>
+                    <p>Step two, create a controller method&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="php">
+// app/controllers/PostsController.php
+
+namespace Simple\App\Controllers;
+
+use Simple\Core\App;
+use Simple\App\Models\Post;
+
+class PostsController
+{
+    public function show($id)
+    {
+        $post = App::get('database')->select('posts', $id, Post::class)
+        return view('posts.show', compact('post'));
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>1. Because of namespacing, we first need to tell which external classes you’re about to use.</p>
+                    <p>2. Then we create a <code>show()</code> method in the PostsController, expecting a post id in parameter. Thanks to the route, if the request URI is 'posts/1', 'posts/2' or 'posts/' + any number, the corresponding query will be executed.</p>
+                    <p>3. We use a variable <code>$post</code> to store the post to pass to the view.</p>
+                    <p>4. We call the QueryBuilder and use its method <code>select()</code>.</p>
+                    <p>5. We pass the 3 parameters expected&thinsp;:</p>
+                    <ul>
+                        <li>the name of table we’re looking into&thinsp;;</li>
+                        <li>the variable id of the post&thinsp;;</li>
+                        <li>the model corresponding to the item we fetch.</li>
+                    </ul>
+                    <p>About the model, it means that in our <code>app/models</code> folder, we have a <code>Post.php</code> class. Let’s do that.</p>
+                    <p>Step 3, create a model&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="php">
+// app/models/Post.php
+
+namespace Simple\App\Models;
+
+class Post
+{
+    public $title;
+    public $content;
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>Let’s be honest. We could deal without models. We could use PDO to fetch items as standard objects with the exact same result. But creating and fetching real models give us more control over what we store and what we fetch. It is a good practice.</p>
+                    <p>Step 4, create a view&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="php">
+// app/views/posts/show.view.php
+
+&lt;?php require __DIR__.'/../partials/head.php'; ?&gt;
+    &lt;article&gt;
+        &lt;h1&gt;&lt;?= $post->title; ?&gt;&lt;/h1&gt;
+        &lt;div&gt;&lt;?= $post->content; ?&gt;&lt;/div&gt;
+    &lt;/article&gt;
+&lt;?php require __DIR__.'/../partials/footer.php'; ?&gt;
+                            </code>
+                        </pre>
+                    </div>
+                </section>
+
+                <nav class="grid-x align-justify padding-bottom-2">
+                    <a href="/docs/views"><i class="fas fa-arrow-left"></i> Views</a>
+                    <a href="/docs/security">Security <i class="fas fa-arrow-right"></i></a>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

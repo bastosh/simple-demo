@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ page }}
+{% endblock %}
+
+{% block style %}
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <main class="grid-y align-center">
+        <h1 class="text-center margin-bottom-2">About</h1>
+        <div class="grid-x align-center">
+            <div class="small-10 medium-8 large-5 text-center">
+                <p class="lead">Simple MVC is a light PHP framework for educational purpose or small projects, when you don’t need the&nbsp;cavalery.</p>
+            </div>
+        </div>
+    </main>
+{% endblock %}

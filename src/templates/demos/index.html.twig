@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ page }}
+{% endblock %}
+
+{% block style %}
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% if demos is empty %}
+        <main class="grid-y align-center">
+            <h1 class="h2 text-center">There are no demos to display</h1>
+        </main>
+    {% else %}
+        <main>
+            {% include 'blocks/portfolio.html.twig' %}
+        </main>
+    {% endif %}
+{% endblock %}

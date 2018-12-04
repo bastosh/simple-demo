@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="/css/app.css">
+        {% endblock %}
+        <title>{% block title %}Simple MVC{% endblock %}</title>
+        {% block style %}{% endblock %}
+    </head>
+    <body>
+        {% include 'partials/nav.html.twig' %}
+
+        {% block content %}{% endblock %}
+
+        {% include 'partials/footer.html.twig' %}
+
+        {% include 'partials/scripts.html.twig' %}
+    </body>
+</html>

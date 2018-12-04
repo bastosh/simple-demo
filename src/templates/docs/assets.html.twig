@@ -1,0 +1,88 @@
+{% extends 'docs.html.twig' %}
+
+{% block title %}
+    {{ page }}
+{% endblock %}
+
+{% block content %}
+    <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+
+        <header>
+            <h1 class="text-center">Assets</h1>
+            <hr>
+
+            <div class="grid-x align-center margin-top-2">
+                <div class="medium-10 large-9">
+                    <nav class="grid-x align-left margin-bottom-2">
+                        <a href="/docs/security"><i class="fas fa-arrow-left"></i> Security</a>
+                    </nav>
+                    <p class="lead margin-top-1 margin-bottom-0">Simple proposes <a href="https://foundation.zurb.com/sites/docs/">Foundation</a> to quickly craft web pages. You are free to change, but if you like it, you’re good to go.</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid-x align-center margin-top-2">
+            <div class="small-11 medium-10 large-9">
+
+                <section>
+                    <h2>Compiling assets</h2>
+                    <p>Simple provides a <code>gulpfile.js</code>.</p>
+                    <p>Here are the commands available&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="bash">
+# Compile the assets in the public/css folder
+gulp sass
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="bash">
+# Watch for changes
+gulp watch
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="bash">
+# Compile and watch for changes
+gulp
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="bash">
+# Remove unused classes
+gulp purgecss
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="bash">
+# Minify the CSS
+gulp nano
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="bash">
+# Compile, purge, minify
+gulp prod
+                            </code>
+                        </pre>
+                    </div>
+                </section>
+
+                <nav class="grid-x align-left  padding-bottom-2">
+                    <a href="/docs/security"><i class="fas fa-arrow-left"></i> Security</a>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

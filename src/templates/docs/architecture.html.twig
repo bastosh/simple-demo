@@ -1,0 +1,90 @@
+{% extends 'docs.html.twig' %}
+
+{% block title %}
+    {{ page }}
+{% endblock %}
+
+{% block content %}
+    <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+
+        <header>
+            <h1 class="text-center">Architecture</h1>
+            <hr>
+            <div class="grid-x align-center margin-top-2">
+                <div class="small-11 medium-10 large-9">
+                    <nav class="grid-x align-justify margin-bottom-3">
+                        <a href="/docs/installation"><i class="fas fa-arrow-left"></i> Installation</a>
+                        <a href="/docs/basics">Basics <i class="fas fa-arrow-right"></i></a>
+                    </nav>
+                    <p class="lead">Before we go, let’s see how the files are organized.</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid-x align-center margin-top-2">
+            <div id="architecture" class="small-11 medium-10 large-9">
+
+                <section>
+                    <h2 class="margin-bottom-1"><code>app/</code></h2>
+                    <p>This is where you build the logic of your app. Your models, views and controllers will live here, in their respective folders, in a good old MVC way.</p>
+                    <p>In addition, here is stored the <code>routes.php</code> file where you will define all the routes of your app.</p>
+                </section>
+
+                <section>
+                    <h2 class="margin-bottom-1"><code>core/</code></h2>
+                    <p>This is the micro-framework. Here live the classes that will handle the request, route it properly and allow you to interact with the database anywhere in your app.</p>
+                </section>
+
+                <section>
+                    <h2 class="margin-bottom-1"><code>public/</code></h2>
+                    <p>This is the entry point of your web server, with the <code>index.php</code> file and all the public assets (CSS, JavaScript, images...).</p>
+                </section>
+
+                <section>
+                    <h2 class="margin-bottom-1"><code>src/</code></h2>
+                    <p>This folder hosts the <code>.scss</code> files that will be compiled to CSS files in the <code>public/</code> folder, and the Twig templates if you want a templating engine instead of the PHP views.</p>
+                </section>
+
+                <section>
+                    <h2 class="margin-bottom-1"><code>config.php</code></h2>
+                    <p>At the root level is stored the <code>config.php</code> file where you will set sensitive data like the password for the administration or for the database, the environment of the app (development or production). You should not commit this file dans quickly add it to the <code>.gitignore</code>.</p>
+                    <div class="docs-code">
+                        <pre>
+                           <code class="php">
+&lt;?php
+
+return [
+  'env' => 'dev',
+  'debug' => true,
+  'prod' => [
+    'dsn' => 'mysql:host={host};dbname={database}',
+    'login' => '{login}',
+    'password' => '{password}',
+    'options' => []
+  ],
+  'dev' => [
+    'dsn' => 'mysql:host=localhost;dbname=simple',
+    'login' => 'root',
+    'password' => 'root',
+    'options' => [
+      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]
+  ],
+  'admin' => [
+    'username' => '',
+    'password' => '',
+  ]
+];
+                            </code>
+                        </pre>
+                    </div>
+                </section>
+
+                <nav class="grid-x align-justify padding-bottom-2">
+                    <a href="/docs/installation"><i class="fas fa-arrow-left"></i> Installation</a>
+                    <a href="/docs/basics">Basics <i class="fas fa-arrow-right"></i></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}

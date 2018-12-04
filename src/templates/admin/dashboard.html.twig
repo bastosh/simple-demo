@@ -1,0 +1,91 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}
+    {{ page }}
+{% endblock %}
+
+{% block content %}
+    <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+
+        <h2 class="text-center">Overview</h2>
+        <hr>
+        <div class="grid-x grid-margin-x grid-padding-x margin-top-2">
+            <section class="cell medium-6">
+                <h3>Features</h3>
+                <table class="hover text-center dashboard">
+                    <thead>
+                    <tr>
+                        <th class="text-center">id</th>
+                        <th class="text-center">Title</th>
+                        <th class="text-center show-for-large">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for feature in features %}
+                    <tr>
+                        <td>{{ feature.id }}</td>
+                        <td><a href="/features/{{ feature.id }}/edit">{{ feature.title }}</a></td>
+                        {%  if feature.published == "1" %}
+                            <td class="show-for-large">Published</td>
+                        {%  else %}
+                            <td class="show-for-large">Unpublished</td>
+                        {%  endif %}
+                    </tr>
+                    {%  endfor %}
+                    </tbody>
+                </table>
+            </section>
+            <section class="cell medium-6">
+                <h3>Articles</h3>
+                <table class="hover text-center dashboard">
+                    <thead>
+                    <tr>
+                        <th class="text-center">id</th>
+                        <th class="text-center">Title</th>
+                        <th class="text-center show-for-large">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for post in posts %}
+                    <tr>
+                        <td>{{ post.id }}</td>
+                        <td><a href="/posts/{{ post.id }}/edit">{{ post.title }}</a></td>
+                        {%  if post.published == "1" %}
+                            <td class="show-for-large">Published</td>
+                        {%  else %}
+                            <td class="show-for-large">Unpublished</td>
+                        {%  endif %}
+                    </tr>
+                    {%  endfor %}
+                    </tbody>
+                </table>
+            </section>
+            <section class="cell medium-6">
+                <h3>Demos</h3>
+                <table class="hover text-center dashboard">
+                    <thead>
+                    <tr>
+                        <th class="text-center">id</th>
+                        <th class="text-center">Title</th>
+                        <th class="text-center show-for-large">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for demo in demos %}
+                        <tr>
+                            <td>{{ demo.id }}</td>
+                            <td><a href="/demos/{{ demo.id }}/edit">{{ demo.title }}</a></td>
+                            {%  if demo.published == "1" %}
+                                <td class="show-for-large">Published</td>
+                            {%  else %}
+                                <td class="show-for-large">Unpublished</td>
+                            {%  endif %}
+                        </tr>
+                    {%  endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ page }}
+{% endblock %}
+
+{% block style %}
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% if features is empty %}
+        <main class="grid-y align-center">
+            <h1 class="h2 text-center">There are no features to display</h1>
+        </main>
+    {% else %}
+        <main class="grid-y align-center">
+            <h1 class="text-center margin-bottom-3">What’s in the box?</h1>
+            {% include 'blocks/features.html.twig' %}
+        </main>
+    {% endif %}
+{% endblock %}
+
+

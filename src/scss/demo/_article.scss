@@ -1,0 +1,113 @@
+.article {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: rem-calc(6);
+
+  &__image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: 50% 50% no-repeat $black;
+    background-size: cover;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform $base-transition;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $black;
+      opacity: 0.1;
+      transition: opacity $base-transition;
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    display: block;
+    padding: rem-calc(69 15 30);
+    min-height: rem-calc(300);
+    background-color: rgba($black, 0.6);
+    opacity: 1;
+    transition: opacity $base-transition;
+  }
+
+  &__tag {
+    display: block;
+    margin: 0 auto rem-calc(17);
+    max-width: rem-calc(370);
+    text-align: center;
+    text-transform: uppercase;
+    color: rgba($white, 0.8);
+  }
+
+  &__title {
+    display: block;
+    margin: 0 auto rem-calc(16);
+    max-width: rem-calc(370);
+    text-align: center;
+    color: $white;
+  }
+
+  &__text {
+    display: block;
+    margin: 0 auto rem-calc(23);
+    max-width: rem-calc(260);
+    text-align: center;
+    color: rgba($white, 0.8);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &:focus &__image,
+  &:hover &__image {
+    transform: scale(1.025);
+
+    &::before {
+      opacity: 0.4;
+    }
+  }
+
+  @include breakpoint(mobile down) {
+    &__content {
+      padding: rem-calc(64 5 30);
+    }
+
+    &__tag {
+      margin-bottom: rem-calc(14);
+    }
+
+    &__text {
+      max-width: rem-calc(250);
+    }
+  }
+
+  @include breakpoint(small down) {
+    &__content {
+      padding-top: rem-calc(70);
+      padding-bottom: rem-calc(30);
+      min-height: rem-calc(300);
+    }
+
+    &__tag {
+      margin-bottom: rem-calc(18);
+    }
+
+    &__title {
+      margin-bottom: rem-calc(19);
+    }
+  }
+}
+
+

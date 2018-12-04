@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        {% block stylesheets %}
+            <link rel="stylesheet"
+                  href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+                  integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+                  crossorigin="anonymous">
+            <link rel="stylesheet"
+                  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
+            <link rel="stylesheet" href="/css/admin.css">
+        {% endblock %}
+        <title>{% block title %}Docs • Simple MVC{% endblock %}</title>
+        <style>
+            section {
+                margin-bottom: 3rem;
+            }
+            #architecture h2 {
+                font-size: 160%;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="app-dashboard shrink-medium">
+
+            <!-- TOPBAR -->
+            <div class="row expanded app-dashboard-top-nav-bar">
+                <div class="columns medium-2">
+                    <button data-toggle="app-dashboard-sidebar" class="menu-icon hide-for-medium"></button>
+                    <a href="/" class="app-dashboard-logo">Simple</a>
+                </div>
+                <div class="columns show-for-medium">
+                    <div class="app-dashboard-search-bar-container">
+                        <input class="app-dashboard-search" type="search" placeholder="Search">
+                        <i class="app-dashboard-search-icon fa fa-search padding-right-1"></i>
+                    </div>
+                </div>
+                <div class="columns shrink app-dashboard-top-bar-actions">
+                    <a href="https://github.com/bastosh/simple-demo" class="button hollow">GitHub</a>
+                    <button data-tooltip tabindex="1" title="Work in progress" data-position="bottom" data-alignment="center"><i class="fas fa-info-circle"></i></button>
+                </div>
+            </div>
+            <!-- END TOPBAR -->
+
+            <div class="app-dashboard-body off-canvas-wrapper">
+                <!-- SIDEBAR -->
+                <div id="app-dashboard-sidebar" class="app-dashboard-sidebar position-left off-canvas off-canvas-absolute reveal-for-medium" data-off-canvas>
+                    <div class="app-dashboard-sidebar-title-area">
+                        <div class="app-dashboard-close-sidebar">
+                            <h3 class="app-dashboard-sidebar-block-title">Menu</h3>
+                            <!-- Close button -->
+                            <button id="close-sidebar" data-app-dashboard-toggle-shrink class="app-dashboard-sidebar-close-button show-for-medium" aria-label="Close menu" type="button">
+                                <span aria-hidden="true"><a href="#"><i class="large fas fa-angle-double-left"></i></a></span>
+                            </button>
+                        </div>
+                        <div class="app-dashboard-open-sidebar">
+                            <button id="open-sidebar" data-app-dashboard-toggle-shrink class="app-dashboard-open-sidebar-button show-for-medium" aria-label="open menu" type="button">
+                                <span aria-hidden="true"><a href="#"><i class="large fas fa-angle-double-right"></i></a></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="app-dashboard-sidebar-inner">
+                        <ul class="vertical menu">
+                            <li>
+                                <a href="/docs/installation">
+                                    <span class="app-dashboard-sidebar-text">Installation</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/docs/architecture">
+                                    <span class="app-dashboard-sidebar-text">Architecture</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/docs/basics">
+                                    <span class="app-dashboard-sidebar-text">Basics</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/docs/views">
+                                    <span class="app-dashboard-sidebar-text">Views</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/docs/database">
+                                    <span class="app-dashboard-sidebar-text">Database</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/docs/security">
+                                    <span class="app-dashboard-sidebar-text">Security</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/docs/assets">
+                                    <span class="app-dashboard-sidebar-text">Assets</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- END SIDEBAR -->
+
+                <!-- CONTENT -->
+                {% block content %}{% endblock %}
+                <!-- END CONTENT -->
+            </div>
+
+        </div>
+
+        {% block scripts %}
+
+            {% include ('partials/scripts.html.twig') %}
+
+            <script>
+                $('[data-app-dashboard-toggle-shrink]').on('click', function(e) {
+                    e.preventDefault();
+                    $(this).parents('.app-dashboard').toggleClass('shrink-medium').toggleClass('shrink-large');
+                });
+
+                $(document).ready(function() {
+
+                    $('table tr').click(function() {
+                        let href = $(this).find("a").attr("href");
+                        if(href) {
+                            window.location = href;
+                        }
+                    });
+
+                });
+
+            </script>
+
+            <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ page }}
+{% endblock %}
+
+{% block content %}
+    <div class="grid-x align-center">
+        <article class="small-10 medium-8 large-6">
+            <h1 class="margin-top-2 margin-bottom-0">{{ post.title }}</h1>
+            <p class="lead font-italic margin-bottom-2">
+                <time>{{ post.created_at|date('M d, Y') }}</time>
+                by John Doe
+            </p>
+            {% if post.image %}
+                <picture>
+                    <source media="(min-width: 768px)"
+                            srcset="/img/{{ post.image }} 1x,
+                              /img/lg-{{ post.image }} 2x">
+                    <img src="/img/sm-{{ post.image }}"
+                         srcset="/img/{{ post.image }} 2x"
+                         alt="" style="width: 100%">
+                </picture>
+            {% endif %}
+            <div class="margin-top-2">{{ post.content|raw }}</div>
+        </article>
+    </div>
+{% endblock %}

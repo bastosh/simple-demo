@@ -1,0 +1,85 @@
+{% extends 'docs.html.twig' %}
+
+{% block title %}
+    {{ page }}
+{% endblock %}
+
+{% block content %}
+    <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+
+        <h1 class="text-center">Installation</h1>
+        <hr>
+        <div class="grid-x align-center margin-top-2">
+            <div class="small-11 medium-10 large-9">
+                <nav class="grid-x align-right margin-bottom-3">
+                    <a href="/docs/architecture">Architecture <i class="fas fa-arrow-right"></i></a>
+                </nav>
+                <section>
+                    <h2>Requirements</h2>
+                    <ul>
+                        <li><a href="https://getcomposer.org/doc/00-intro.md">Composer</a> installed.</li>
+                        <li><a href="https://nodejs.org/en/">nodejs</a> and npm installed</li>
+                        <li>PDO PHP Extension</li>
+                        <li>A local development server (have a look at <a href="https://laravel.com/docs/5.7/valet">Valet</a>)</li>
+                        <li>Good bases in HTML, CSS and PHP.</li>
+                        <li>Familiarity with object-oriented programming and namespacing</li>
+                        <li>Familiarity with <a href="https://foundation.zurb.com/sites.html">Foundation</a>, <a href="https://sass-lang.com/">Sass</a> and <a href="https://gulpjs.com/">Gulp</a>.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Download</h2>
+                    <p class="margin-bottom-0">Download or clone the repository&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="bash">
+git clone https://github.com/simple-mvc/simple.git my-new-project
+                            </code>
+                        </pre>
+                    </div>
+                    <p class="margin-bottom-0">Go into the folder and start a new Git repository&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="bash">
+cd my-new-project
+
+rm -rf .git && git init
+                            </code>
+                        </pre>
+                    </div>
+                </section>
+                <section>
+                    <h2>Install dependencies</h2>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="bash">
+composer install && npm install
+                            </code>
+                        </pre>
+                    </div>
+                </section>
+                <section>
+                    <h2>Database configuration</h2>
+                    <p>Create a database.</p>
+                    <p>Populate it with the file <code>simple.sql</code>.</p>
+                    <p>Open <code>config.php</code> file and set the username and the password according to your configuration.</p>
+                    <div class="docs-code">
+                        <pre>
+                           <code class="php">
+'dsn' => 'mysql:host=localhost;dbname=simple',
+'login' => 'root',
+'password' => 'root',
+                            </code>
+                        </pre>
+                    </div>
+                    <p>And you should be good to go.</p>
+                    <p>Let’s learn the basics.</p>
+                </section>
+
+                <nav class="grid-x align-right padding-bottom-2">
+                    <a href="/docs/architecture">Architecture <i class="fas fa-arrow-right"></i></a>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

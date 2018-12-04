@@ -1,0 +1,155 @@
+{% extends 'docs.html.twig' %}
+
+{% block title %}
+    {{ page }}
+{% endblock %}
+
+{% block content %}
+    <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+
+        <header>
+            <h1 class="text-center">Views</h1>
+            <hr>
+            <div class="grid-x align-center margin-top-2">
+                <div class="small-11 medium-10 large-9">
+                    <nav class="grid-x align-justify margin-bottom-3">
+                        <a href="/docs/basics"><i class="fas fa-arrow-left"></i> Basics</a>
+                        <a href="/docs/database">Database <i class="fas fa-arrow-right"></i></a>
+                    </nav>
+                    <p class="lead margin-top-1 margin-bottom-0">We need a well organized system of views to display or precious data. Simple provides an alternative&thinsp;: a basic system of classic PHP views, and a more advanced but cleaner templating system with Twig.</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid-x align-center margin-top-2">
+            <div class="medium-10 large-9">
+
+                <section>
+                    <h2>Views</h2>
+                    <p>By following a convention (<code>name.view.php</code>) and storing all our views in the <code>app/views</code> folder, well organized in folders according to the logic of your app, you can refer them by passing the view() helper the name of the folder and the name of the view, without its extensions.</p>
+                    <p>Here is a basic view for our welcome page&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="php">
+&lt;?php require __DIR__.'/../partials/head.php'; ?&gt;
+    &lt;h1&gt;Welcome!&lt;/h1&gt;
+&lt;?php require __DIR__.'/../partials/footer.php'; ?&gt;
+                            </code>
+                        </pre>
+                    </div>
+                    <p>A nice way to clean up the views is to write the common parts as partials and require them in each view. By doing so, we can focus on what is specific to the view we are working on.</p>
+                </section>
+
+                <section>
+                    <h2>Templates</h2>
+                    <p>Views are just basic boring PHP files. We can be even more dangerous using a templating engine named Twig. To do so, we just have to make our controller inherit his parent Controller, and we get access to the power of Twig templates.</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="php">
+class PagesController extends Controller
+{
+    public function welcome()
+    {
+        return $this->render('pages.welcome');
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>Here we call the method render() from the Controller class. Parameters are exactly the same, the folder and the name of the view.</p>
+                    <p>Twig templates are stored in the <code>src/templates</code> folder, where the views are stored in folder, following a convention for naming&thinsp;: <code>name.html.twig</code>.</p>
+                    <p>If you have never heard about Twig, you should probably learn some basics from <a href="https://twig.symfony.com/">Twig website</a>.</p>
+                    <p>A Twig template looks like that&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="html">
+&lbrace;% extends 'base.html.twig' %&rbrace;
+
+&lbrace;% block content %&rbrace;
+    &lt;h1&gt;Welcome!&lt;/h1&gt;
+&lbrace;% endblock %&rbrace;
+                            </code>
+                        </pre>
+                    </div>
+                    <p>It is not that different. We have a base template where we define variable areas (like “here are my stylesheets”, “here is my content”), and in our views we indicate which template we inherit (we can have one for the static pages, one for the blog, one for the administration...) and just focus on the variable parts. Like we did in PHP but in a more efficient and cleaner way.</p>
+                </section>
+
+                <section>
+                    <h2>Variables</h2>
+                    <p>We wouldn’t go very far and everything would be somehow static if we couldn’t pass variables to our views.</p>
+                    <p>It’s pretty simple&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="php">
+class PagesController
+{
+    public function welcome()
+    {
+        $message = 'Hello';
+        return view('pages.welcome', compact('message'));
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p>We can use the native PHP function compact(), as view() extracts the data and passes it to the view, but the array syntax is possible and is more readable if there are two or more variables.</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="php">
+class PagesController
+{
+    public function welcome()
+    {
+        $message = 'Bonjour';
+        $user = 'Jean-Pierre';
+        return view('pages.welcome', [
+            'message' => $message,
+            'user' => $user,
+        ]);
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <p class="margin-bottom-0">And in the welcome view&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="php">
+&lt;?php echo "{$message} {$user}"; ?&gt;
+                            </code>
+                        </pre>
+                    </div>
+                    <p>It would be the exact same logic with Twig, but with a slight different syntax in our view&thinsp;:</p>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="php">
+class PagesController extends Controller
+{
+    public function welcome()
+    {
+        $message = 'Bonjour';
+        $user = 'Jean-Pierre';
+        return $this->render('pages.welcome', compact('message', 'user');
+    }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="docs-code">
+                        <pre>
+                            <code class="html">
+&lt;h1&gt;&lbrace;&lbrace; message &rbrace;&rbrace; &lbrace;&lbrace; user &rbrace;&rbrace;&lt;/h1&gt;
+                            </code>
+                        </pre>
+                    </div>
+                </section>
+
+                <nav class="grid-x align-justify padding-bottom-2">
+                    <a href="/docs/basics"><i class="fas fa-arrow-left"></i> Basics</a>
+                    <a href="/docs/database">Database <i class="fas fa-arrow-right"></i></a>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

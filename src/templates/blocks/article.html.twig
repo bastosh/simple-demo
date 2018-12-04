@@ -1,0 +1,12 @@
+<section class="cell medium-6 large-4">
+    <a class="article" href="/posts/{{ post.id }}" data-aos="fade-up">
+        {% if post.image %}
+            <div class="article__image" style="background-image: url(/img/lg-{{ post.image }});"></div>
+        {% endif %}
+        <div class="article__content">
+            <p class="article__tag tag-2">{{ post.created_at|date('M d, Y') }}</p>
+            <h2 class="article__title">{{ post.title }}</h2>
+            <p class="article__text">By John Doe</p>
+        </div>
+    </a>
+</section>

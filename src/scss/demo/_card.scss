@@ -1,0 +1,73 @@
+  .card {
+    display: block;
+    border-radius: rem-calc(6);
+    box-shadow: rem-calc(3 4 10) rgba($black, 0.2);
+    background-color: $white;
+
+    &__image {
+      position: relative;
+      z-index: 1;
+      display: block;
+      overflow: hidden;
+      border-radius: rem-calc(6 6 0 0);
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        border-radius: rem-calc(6 6 0 0);
+        width: 100%;
+        height: 100%;
+        background: $black;
+        opacity: 0;
+        transition: opacity $base-transition;
+      }
+
+      &__img {
+        width: 100%;
+      }
+    }
+
+    &__content {
+      display: block;
+      padding: rem-calc(25 30 32 30);
+    }
+
+    &__title {
+      display: block;
+      margin-bottom: rem-calc(8);
+      font-weight: 400;
+      font-size: rem-calc(18);
+      line-height: rem-calc(25);
+      color: $text-heading;
+    }
+
+    &__text {
+      display: block;
+      font-weight: 400;
+      font-size: rem-calc(16);
+      line-height: rem-calc(25);
+      color: $gray-dark;
+      transition: $base-transition;
+    }
+
+    &:focus &__image,
+    &:hover &__image {
+      &::before {
+        opacity: 0.3;
+      }
+    }
+
+    &:focus &__text,
+    &:hover &__text {
+      color: $text-heading;
+    }
+  }
+
+  @include breakpoint(medium down) {
+    .card {
+      max-width: rem-calc(500);
+    }
+  }
