@@ -24,7 +24,7 @@ gulp.task('sass', () => {
 
 gulp.task('purgecss', () => {
     return gulp
-        .src(['public/css/app.css', 'public/css/admin.css', 'public/demo.scs'])
+        .src(['public/css/app.css', 'public/css/admin.css'])
         .pipe(
             $.purgecss({
                 content: ['src/templates/**/*.twig', 'app/views/**/*.php']
@@ -35,7 +35,7 @@ gulp.task('purgecss', () => {
 
 gulp.task('nano', () => {
     return gulp
-        .src(['public/css/app.css', 'public/css/admin.css', 'public/css/demo.scs'])
+        .src(['public/css/app.css', 'public/css/admin.css', 'public/css/demo.css'])
         .pipe($.cssnano())
         .pipe(gulp.dest('public/css'))
 });
@@ -47,5 +47,5 @@ gulp.task('watch', () => {
 gulp.task('default', ['sass', 'watch']);
 
 gulp.task('prod', () => {
-    runSequence('sass', 'purgecss','nano');
+    runSequence('sass', 'nano');
 });

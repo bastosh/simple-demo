@@ -17,7 +17,7 @@ class PostsController extends Controller
   public function index()
   {
 
-    $posts = App::get('database')->selectLastPublished('posts', Post::class, 0);
+    $posts = App::get('database')->selectLastPublished('posts', Post::class, 3);
     $page = 'Articles';
 
     return $this->render('posts.index', compact('page', 'posts'));
@@ -235,10 +235,13 @@ class PostsController extends Controller
     }
 
     $post = App::get('database')->select('posts', $id, Post::class);
-    // Remove the images associated
-    unlink('../public/img/sm-'.$post->image);
-    unlink('../public/img/'.$post->image);
-    unlink('../public/img/lg-'.$post->image);
+
+    if ($post->image) {
+        // Remove the images associated
+        unlink('../public/img/sm-'.$post->image);
+        unlink('../public/img/'.$post->image);
+        unlink('../public/img/lg-'.$post->image);
+    }
 
     App::get('database')->delete('posts', $id);
 

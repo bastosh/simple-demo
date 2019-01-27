@@ -134,7 +134,6 @@ $app-dashboard-top-nav-height: 55px;
 }
 
 .app-dashboard-body-content {
-  transition: all $offcanvas-transition-length $offcanvas-transition-timing;
   overflow-y: auto;
   flex: 1 1 0;
   padding: 20px;

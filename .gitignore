@@ -3,3 +3,5 @@
 vendor/
 node_modules/
 public/css/*.css
+composer.lock
+package-lock.json
